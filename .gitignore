@@ -1,0 +1,53 @@
+# Secrets — never commit tokens, server address, or bot token
+.env
+.env.*
+!.env.example
+local.properties
+*.jks
+*.keystore
+
+# Python
+# https://github.com/github/gitignore/blob/main/Python.gitignore
+__pycache__/
+*.py[codz]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Android
+# https://github.com/github/gitignore/blob/main/Android.gitignore
+.gradle/
+build/
+.kotlin/
+*.log
+captures/
+.externalNativeBuild/
+.cxx/
+*.aab
+*.apk
+output-metadata.json
+*.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+*.hprof
+google-services.json
+
+# Local runtime data (uploads and transcripts stay off the repo)
+inbox/
+*.mp4
+*.mp4.part
+*.wav
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini

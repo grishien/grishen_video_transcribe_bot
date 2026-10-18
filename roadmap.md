@@ -43,9 +43,9 @@ The client-supplied file name is ignored.
 - [x] **0.1** `git init`, `.gitignore`, folder structure `vps/ android/ pc/`; ask me for the GitHub repository URL and connect it.
 
 ## Phase 1 — VPS receiver (`vps/`)
-- [ ] **1.1** FastAPI + uvicorn, `requirements.txt`, config from env: `TOKEN`, `INBOX_DIR`, `MAX_SIZE_MB`, `PORT`. Endpoints per the protocol table. Read the body only via `request.stream()`, never load it into memory. Provide a one-line command to generate the token (`python -c "import secrets; print(secrets.token_urlsafe(32))"`). Refuse to start if `TOKEN` is shorter than 32 characters.
-- [ ] **1.2** Deploy files: `deploy/transcribe-inbox.service` (systemd, unprivileged user, uvicorn listening on `0.0.0.0:$PORT`, env from a root-only env file). No Caddy, no nginx.
-- [ ] **1.3** `vps/README.md`: step-by-step deployment (user, venv, systemd unit); how to pick a free port (`sudo ss -tlnp` — the port must not be used by Amnezia, frp or anything else); how to open that port in the VPS firewall (and in the hosting provider's panel if it has one); a set of `curl` commands for verification. Explicitly state that existing Amnezia and frp setups must not be modified.
+- [x] **1.1** FastAPI + uvicorn, `requirements.txt`, config from env: `TOKEN`, `INBOX_DIR`, `MAX_SIZE_MB`, `PORT`. Endpoints per the protocol table. Read the body only via `request.stream()`, never load it into memory. Provide a one-line command to generate the token (`python -c "import secrets; print(secrets.token_urlsafe(32))"`). Refuse to start if `TOKEN` is shorter than 32 characters.
+- [x] **1.2** Deploy files: `deploy/transcribe-inbox.service` (systemd, unprivileged user, uvicorn listening on `0.0.0.0:$PORT`, env from a root-only env file). No Caddy, no nginx.
+- [x] **1.3** `vps/README.md`: step-by-step deployment (user, venv, systemd unit); how to pick a free port (`sudo ss -tlnp` — the port must not be used by Amnezia, frp or anything else); how to open that port in the VPS firewall (and in the hosting provider's panel if it has one); a set of `curl` commands for verification. Explicitly state that existing Amnezia and frp setups must not be modified.
 - [ ] **1.P Check (me):** upload → `.mp4` appears in `inbox/`; visible in `/files`; downloadable; deletable; 401 without token; an interrupted upload leaves no `.mp4`; Amnezia and frp still work.
 
 ## Phase 2 — Android app (`android/`)

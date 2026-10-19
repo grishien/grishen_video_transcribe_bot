@@ -49,13 +49,13 @@ The client-supplied file name is ignored.
 - [x] **1.P Check (me):** upload → `.mp4` appears in `inbox/`; visible in `/files`; downloadable; deletable; 401 without token; an interrupted upload leaves no `.mp4`; Amnezia and frp still work.
 
 ## Phase 2 — Android app (`android/`)
-- [ ] **2.1** Project: Kotlin, minSdk 26, targetSdk as in the current Android Studio template, single `app` module, no Compose. `SERVER_URL` (like `http://<VPS_IP>:<PORT>`) and `UPLOAD_TOKEN` via `local.properties` → `BuildConfig` (file in `.gitignore`). No settings screens.
-- [ ] **2.2** Cleartext HTTP is blocked by default on modern Android: add a `network_security_config` that permits cleartext traffic only for the VPS IP (take it from `local.properties` at build time or document where to put it; do not hardcode my IP into committed files).
-- [ ] **2.3** `MainActivity` with a no-UI theme handles `ACTION_SEND`, category `DEFAULT`, `mimeType="video/*"`. Gets the URI from `EXTRA_STREAM` (typed `getParcelableExtra` on API 33+), passes it to the service via `ClipData` + `FLAG_GRANT_READ_URI_PERMISSION` (otherwise access to the `content://` URI is lost), then calls `finish()` immediately.
-- [ ] **2.4** Foreground service (type `dataSync`; manifest permissions `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, `INTERNET`, `POST_NOTIFICATIONS`): reads the URI via `ContentResolver.openInputStream` and streams it to OkHttp `PUT /upload` with a custom `RequestBody`, without loading the file into memory. Timeouts sized for 50–200 MB over a mobile network.
-- [ ] **2.5** Notification with progress and the result ("Uploaded" / "Error: reason"). Up to 3 retries with increasing delay on network errors.
-- [ ] **2.6** Launcher screen: text "Share videos from TikTok here" and a notification permission request (Android 13+).
-- [ ] **2.7** A debug APK builds and installs on the phone.
+- [x] **2.1** Project: Kotlin, minSdk 26, targetSdk as in the current Android Studio template, single `app` module, no Compose. `SERVER_URL` (like `http://<VPS_IP>:<PORT>`) and `UPLOAD_TOKEN` via `local.properties` → `BuildConfig` (file in `.gitignore`). No settings screens.
+- [x] **2.2** Cleartext HTTP is blocked by default on modern Android: add a `network_security_config` that permits cleartext traffic only for the VPS IP (take it from `local.properties` at build time or document where to put it; do not hardcode my IP into committed files).
+- [x] **2.3** `MainActivity` with a no-UI theme handles `ACTION_SEND`, category `DEFAULT`, `mimeType="video/*"`. Gets the URI from `EXTRA_STREAM` (typed `getParcelableExtra` on API 33+), passes it to the service via `ClipData` + `FLAG_GRANT_READ_URI_PERMISSION` (otherwise access to the `content://` URI is lost), then calls `finish()` immediately.
+- [x] **2.4** Foreground service (type `dataSync`; manifest permissions `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, `INTERNET`, `POST_NOTIFICATIONS`): reads the URI via `ContentResolver.openInputStream` and streams it to OkHttp `PUT /upload` with a custom `RequestBody`, without loading the file into memory. Timeouts sized for 50–200 MB over a mobile network.
+- [x] **2.5** Notification with progress and the result ("Uploaded" / "Error: reason"). Up to 3 retries with increasing delay on network errors.
+- [x] **2.6** Launcher screen: text "Share videos from TikTok here" and a notification permission request (Android 13+).
+- [x] **2.7** A debug APK builds and installs on the phone.
 - [ ] **2.P Check (me):** "Send to" from the gallery, then from TikTok → file on the VPS, notification shows the result.
 
 ## Phase 3 — PC worker (`pc/`)

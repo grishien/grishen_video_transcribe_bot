@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Transcribe</string>
+    <string name="launcher_message">Share videos from TikTok here</string>
+    <string name="notification_channel_name">Uploads</string>
+    <string name="notification_channel_description">Video upload progress and result</string>
+    <string name="notification_uploading">Uploading</string>
+</resources>

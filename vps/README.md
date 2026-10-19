@@ -24,9 +24,19 @@ The `Local Address` column lists ports that are already taken. Choose a TCP port
 
 ## Deploy
 
-Python 3.10 or newer is required (`python3 --version`). These steps assume a Debian or Ubuntu VPS. On another distribution, install `python3` and `python3-venv` with that distribution's packages. Do not upgrade unrelated packages.
+Copy this `vps` directory to the server (the clone you already have, `scp`, or otherwise). On the server, from inside that directory, deploy either with `install.sh` or by hand. Both install the same unit. Neither edits Amnezia or frp, and neither restarts those services.
 
-Copy this `vps` directory to the server (the clone you already have, `scp`, or otherwise). Then, on the server, from inside the copied `vps` directory:
+### install.sh
+
+```bash
+sudo bash install.sh --token 'paste-the-generated-token' --port PASTE_PORT
+```
+
+Leave out `--token` or `--port` and the script asks for them. Optional `--max-size-mb` defaults to 500. The script creates the user, the venv, `/etc/transcribe-inbox.env` (root, mode 600), and the systemd unit, then starts only `transcribe-inbox`. It refuses a port that is already taken by another process. If `ufw` or `firewalld` is already active, it opens this TCP port and leaves the other rules as they are. It does not enable a firewall that is off. If the provider panel has a firewall, open the same port there yourself. Running the script again updates the app files and restarts only this service.
+
+### By hand
+
+Python 3.10 or newer is required (`python3 --version`). These steps assume a Debian or Ubuntu VPS. On another distribution, install `python3` and `python3-venv` with that distribution's packages. Do not upgrade unrelated packages.
 
 ```bash
 sudo useradd --system --user-group --no-create-home --shell /usr/sbin/nologin transcribe-inbox

@@ -2,6 +2,16 @@
 <resources>
     <string name="app_name">Transcribe</string>
     <string name="launcher_message">Share videos from TikTok here</string>
+    <string name="server_label">Server (IP:PORT)</string>
+    <string name="token_label">Token</string>
+    <string name="save">Save</string>
+    <string name="saved">Saved</string>
+    <string name="error_server_and_token">Enter a server and a token.</string>
+    <string name="error_server_required">Enter a server as host:port.</string>
+    <string name="error_server_invalid">Server must be host:port with a port from 1 to 65535, without http://.</string>
+    <string name="error_token_required">Enter a token.</string>
+    <string name="error_save_failed">Could not save settings.</string>
+    <string name="notification_settings_missing">Set server and token in the app</string>
     <string name="notification_channel_name">Uploads</string>
     <string name="notification_channel_description">Video upload progress and result</string>
     <string name="notification_uploading">Uploading</string>

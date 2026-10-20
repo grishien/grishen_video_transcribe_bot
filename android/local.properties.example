@@ -1,6 +1,0 @@
-# Copy these two lines into android/local.properties (that file is gitignored).
-# Leave the sdk.dir line Android Studio writes there.
-# SERVER_URL is the VPS receiver, for example http://203.0.113.10:8080
-# UPLOAD_TOKEN is the same TOKEN the VPS process uses (at least 32 characters).
-SERVER_URL=http://VPS_IP:PORT
-UPLOAD_TOKEN=

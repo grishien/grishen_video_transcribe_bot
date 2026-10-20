@@ -114,6 +114,11 @@ class UploadService : Service() {
     }
 
     private fun uploadWithRetries(uri: Uri) {
+        val settings = AppSettings.read(this)
+        if (settings == null) {
+            showResult(getString(R.string.notification_settings_missing))
+            return
+        }
         val length = contentLength(uri)
         if (length < 0L) {
             showResult("Error: unknown file size")
@@ -122,7 +127,7 @@ class UploadService : Service() {
         var attempt = 0
         while (true) {
             try {
-                uploadOnce(uri, length)
+                uploadOnce(uri, length, settings)
                 showResult("Uploaded")
                 return
             } catch (notFound: FileNotFoundException) {
@@ -160,10 +165,10 @@ class UploadService : Service() {
         }
     }
 
-    private fun uploadOnce(uri: Uri, length: Long) {
+    private fun uploadOnce(uri: Uri, length: Long, settings: UploadSettings) {
         lastPercent = -1
         lastProgressUptime = 0L
-        val url = BuildConfig.SERVER_URL.trimEnd('/') + "/upload"
+        val url = "http://${settings.server}/upload"
         val body = StreamingRequestBody(
             openStream = {
                 contentResolver.openInputStream(uri)
@@ -174,7 +179,7 @@ class UploadService : Service() {
         )
         val request = Request.Builder()
             .url(url)
-            .header("Authorization", "Bearer ${BuildConfig.UPLOAD_TOKEN}")
+            .header("Authorization", "Bearer ${settings.token}")
             .put(body)
             .build()
         val call = client.newCall(request)

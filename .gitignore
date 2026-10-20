@@ -41,11 +41,12 @@ render.experimental.xml
 *.hprof
 google-services.json
 
-# Local runtime data (uploads and transcripts stay off the repo)
+# Local runtime data (uploads, transcripts, and worker logs stay off the repo)
 inbox/
 *.mp4
 *.mp4.part
 *.wav
+pc/logs/
 
 # OS
 .DS_Store

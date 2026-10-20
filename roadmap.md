@@ -56,15 +56,15 @@ The client-supplied file name is ignored.
 - [x] **2.5** Notification with progress and the result ("Uploaded" / "Error: reason"). Up to 3 retries with increasing delay on network errors.
 - [x] **2.6** Launcher screen: text "Share videos from TikTok here" and a notification permission request (Android 13+).
 - [x] **2.7** A debug APK builds and installs on the phone.
-- [ ] **2.P Check (me):** "Send to" from the gallery, then from TikTok → file on the VPS, notification shows the result.
+- [x] **2.P Check (me):** "Send to" from the gallery, then from TikTok → file on the VPS, notification shows the result.
 
 ## Phase 3 — PC worker (`pc/`)
-- [ ] **3.1** Dependencies: `httpx`, `faster-whisper`, `python-dotenv`. `.env`: `SERVER_URL` (`http://<VPS_IP>:<PORT>`), `TOKEN`, `TG_BOT_TOKEN`, `TG_CHAT_ID`, `POLL_SECONDS=10`, `MODEL=large-v3`. Provide `.env.example`.
-- [ ] **3.2** Loop: `GET /files` → download each new id to a temp folder → ffmpeg `-vn -ac 1 -ar 16000` to wav → faster-whisper (`device="cuda"`, `compute_type="float16"`, language auto-detect, `vad_filter=True`). The model is loaded once at startup.
-- [ ] **3.3** Telegram delivery: `sendMessage`; text longer than 4096 characters is sent as a `.txt` via `sendDocument`; an empty result sends a "no speech found" message.
-- [ ] **3.4** `DELETE` the file on the VPS only after a successful Telegram send. On any error the file stays and is retried on the next cycle. After 3 failures on one id: send me an error message in Telegram and skip that id until restart. Temp files on the PC are always removed (`finally`).
-- [ ] **3.5** Logging to console and to a rotating file.
-- [ ] **3.6** `pc/README.md`: installing dependencies; CUDA/cuDNN for faster-whisper (check the current faster-whisper/ctranslate2 README, do not guess versions); how to get `TG_CHAT_ID`; autostart via Windows Task Scheduler.
+- [x] **3.1** Dependencies: `httpx`, `faster-whisper`, `python-dotenv`. `.env`: `SERVER_URL` (`http://<VPS_IP>:<PORT>`), `TOKEN`, `TG_BOT_TOKEN`, `TG_CHAT_ID`, `POLL_SECONDS=10`, `MODEL=large-v3`. Provide `.env.example`.
+- [x] **3.2** Loop: `GET /files` → download each new id to a temp folder → ffmpeg `-vn -ac 1 -ar 16000` to wav → faster-whisper (`device="cuda"`, `compute_type="float16"`, language auto-detect, `vad_filter=True`). The model is loaded once at startup.
+- [x] **3.3** Telegram delivery: `sendMessage`; text longer than 4096 characters is sent as a `.txt` via `sendDocument`; an empty result sends a "no speech found" message.
+- [x] **3.4** `DELETE` the file on the VPS only after a successful Telegram send. On any error the file stays and is retried on the next cycle. After 3 failures on one id: send me an error message in Telegram and skip that id until restart. Temp files on the PC are always removed (`finally`).
+- [x] **3.5** Logging to console and to a rotating file.
+- [x] **3.6** `pc/README.md`: installing dependencies; CUDA/cuDNN for faster-whisper (check the current faster-whisper/ctranslate2 README, do not guess versions); how to get `TG_CHAT_ID`; autostart via Windows Task Scheduler.
 - [ ] **3.P Check (me):** drop an mp4 into `inbox/` manually → transcript in Telegram within ≤10 seconds, file gone from the VPS.
 
 ## Phase 4 — End-to-end test
